@@ -27,6 +27,8 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/22788/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/26640/report_coursesize_moodle40_2021030808.zip /var/www/html/report/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/24447/mod_customcert_moodle39_2020061502.zip /var/www/html/mod/
 
+RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
+
 VOLUME /var/www/moodledata
 
 FROM nginx:1.19.3 as nginx
