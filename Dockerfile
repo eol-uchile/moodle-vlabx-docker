@@ -38,9 +38,9 @@ WORKDIR /var/www/html
 COPY edumy.zip .
 
 RUN unzip edumy.zip && \
-  cp -R theme/* /var/www/html/theme/ && \
-  cp -R blocks/* /var/www/html/blocks/ && \
-  cp -R local/* /var/www/html/local/
+  cp -Rn theme/* /var/www/html/theme/ && \
+  cp -Rn blocks/* /var/www/html/blocks/ && \
+  cp -Rn local/* /var/www/html/local/
 
 # Eliminar el archivo edumy.zip después de extraer el contenido
 RUN rm edumy.zip
