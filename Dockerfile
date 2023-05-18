@@ -9,9 +9,9 @@ RUN /root/php-extensions.sh
 RUN chmod 777 /tmp && chmod +t /tmp
 
 RUN mkdir /var/www/moodledata && chown www-data /var/www/moodledata && \
-    mkdir /var/www/phpunitdata && chown www-data /var/www/phpunitdata && \
-    mkdir /var/www/behatdata && chown www-data /var/www/behatdata && \
-    mkdir /var/www/behatfaildumps && chown www-data /var/www/behatfaildumps
+  mkdir /var/www/phpunitdata && chown www-data /var/www/phpunitdata && \
+  mkdir /var/www/behatdata && chown www-data /var/www/behatdata && \
+  mkdir /var/www/behatfaildumps && chown www-data /var/www/behatfaildumps
 
 COPY /src /var/www/html
 ADD /es_39.tar.gz /var/www/html/lang
@@ -28,6 +28,22 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/22788/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/24447/mod_customcert_moodle39_2020061502.zip /var/www/html/mod/
 
 RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
+
+# Descomprimir el archivo edumy.zip
+RUN apt-get update && \
+  apt-get install -y unzip
+
+WORKDIR /var/www/html
+
+COPY edumy.zip .
+
+RUN unzip edumy.zip && \
+  cp -R theme/* theme/ && \
+  cp -R blocks/* blocks/ && \
+  cp -R local/* local/
+
+# Eliminar el archivo edumy.zip después de extraer el contenido
+RUN rm edumy.zip
 
 VOLUME /var/www/moodledata
 
