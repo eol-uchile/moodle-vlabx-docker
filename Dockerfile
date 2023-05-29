@@ -61,3 +61,4 @@ COPY static.conf /etc/nginx/conf.d/default.conf
 RUN chmod -R 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 RUN chown -R www-data:www-data /var/www/html/theme/edumy/images
+RUN chmod -R 755 /var/www/html/theme/edumy/images
