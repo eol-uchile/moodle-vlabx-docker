@@ -13,6 +13,8 @@ RUN mkdir /var/www/moodledata && chown www-data /var/www/moodledata && \
   mkdir /var/www/behatdata && chown www-data /var/www/behatdata && \
   mkdir /var/www/behatfaildumps && chown www-data /var/www/behatfaildumps
 
+RUN chown -R www-data:www-data /var/www/html
+
 COPY /src /var/www/html
 ADD /es_39.tar.gz /var/www/html/lang
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -25,9 +27,9 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/22788/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/22807/local_feedbackviewer_moodle310_2020100701.zip /var/www/html/local/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/22766/theme_moove_moodle39_2020071900.zip /var/www/html/theme \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/26640/report_coursesize_moodle40_2021030808.zip /var/www/html/report/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/24447/mod_customcert_moodle39_2020061502.zip /var/www/html/mod/
+#   && /root/moodle-extension.php https://moodle.org/plugins/download.php/28708/mod_customcert_moodle311_2021051704.zip /var/www/html/mod/
 
-RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
+# RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
 
 # Descomprimir el archivo edumy.zip
 RUN apt-get update && \
@@ -36,6 +38,9 @@ RUN apt-get update && \
 WORKDIR /var/www/html
 
 COPY edumy.zip .
+
+RUN chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 RUN unzip edumy.zip && \
   cp -Rn theme/* /var/www/html/theme/ && \
