@@ -40,7 +40,9 @@ WORKDIR /var/www/html
 COPY edumy.zip .
 
 RUN chmod -R 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html/theme
+RUN chown -R www-data:www-data /var/www/html/blocks
+RUN chown -R www-data:www-data /var/www/html/local
 
 RUN unzip edumy.zip && \
   cp -Rn theme/* /var/www/html/theme/ && \
@@ -58,3 +60,4 @@ COPY --from=base /var/www/html /var/www/html
 COPY static.conf /etc/nginx/conf.d/default.conf
 RUN chmod -R 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html/theme/edumy/images
