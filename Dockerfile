@@ -51,3 +51,5 @@ FROM nginx:1.19.3 as nginx
 
 COPY --from=base /var/www/html /var/www/html
 COPY static.conf /etc/nginx/conf.d/default.conf
+RUN chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
