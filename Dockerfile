@@ -11,9 +11,8 @@ RUN chmod 777 /tmp && chmod +t /tmp
 RUN mkdir /var/www/moodledata && chown www-data /var/www/moodledata && \
   mkdir /var/www/phpunitdata && chown www-data /var/www/phpunitdata && \
   mkdir /var/www/behatdata && chown www-data /var/www/behatdata && \
-  mkdir /var/www/behatfaildumps && chown www-data /var/www/behatfaildumps
-
-RUN chown -R www-data:www-data /var/www/html
+  mkdir /var/www/behatfaildumps && chown www-data /var/www/behatfaildumps && \
+  chown -R www-data:www-data /var/www/html
 
 COPY /src /var/www/html
 ADD /es_39.tar.gz /var/www/html/lang
