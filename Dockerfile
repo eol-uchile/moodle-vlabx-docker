@@ -38,6 +38,18 @@ WORKDIR /var/www/html
 
 COPY edumy.zip .
 
+
+RUN unzip edumy.zip -d edumy \
+  && cp -Rn edumy/theme/* /var/www/html/theme/ \
+  && cp -Rn edumy/blocks/* /var/www/html/blocks/ \
+  && cp -Rn edumy/local/* /var/www/html/local/ \
+  && chown -R www-data:www-data /var/www/html/theme \
+  && chown -R www-data:www-data /var/www/html/blocks \
+  && chown -R www-data:www-data /var/www/html/local \
+  && chmod -R 755 /var/www/html/theme \
+  && chmod -R 755 /var/www/html/blocks \
+  && chmod -R 755 /var/www/html/local
+
 # RUN unzip edumy.zip \
 #   && chown -R www-data:www-data /var/www/html/theme/edumy \
 #   && chmod -R 755 /var/www/html/theme/edumy
@@ -45,14 +57,14 @@ COPY edumy.zip .
 # RUN chown -R www-data:www-data /var/www/html \
 #   && chmod -R 755 /var/www/html
 
-RUN unzip edumy.zip -d /var/www/html \
-  && chown -R www-data:www-data /var/www/html/theme/edumy \
-  && chmod -R 755 /var/www/html/theme/edumy
+# RUN unzip edumy.zip -d /var/www/html \
+#   && chown -R www-data:www-data /var/www/html/theme/edumy \
+#   && chmod -R 755 /var/www/html/theme/edumy
 
-RUN unzip -o edumy.zip && \
-  cp -Rn theme/* /var/www/html/theme/ && \
-  cp -Rn blocks/* /var/www/html/blocks/ && \
-  cp -Rn local/* /var/www/html/local/
+# RUN unzip -o edumy.zip && \
+#   cp -Rn theme/* /var/www/html/theme/ && \
+#   cp -Rn blocks/* /var/www/html/blocks/ && \
+#   cp -Rn local/* /var/www/html/local/
 
 # Eliminar el archivo edumy.zip después de extraer el contenido
 RUN rm edumy.zip
