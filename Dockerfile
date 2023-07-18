@@ -50,22 +50,6 @@ RUN unzip edumy.zip -d edumy \
   && chmod -R 755 /var/www/html/blocks \
   && chmod -R 755 /var/www/html/local
 
-# RUN unzip edumy.zip \
-#   && chown -R www-data:www-data /var/www/html/theme/edumy \
-#   && chmod -R 755 /var/www/html/theme/edumy
-
-# RUN chown -R www-data:www-data /var/www/html \
-#   && chmod -R 755 /var/www/html
-
-# RUN unzip edumy.zip -d /var/www/html \
-#   && chown -R www-data:www-data /var/www/html/theme/edumy \
-#   && chmod -R 755 /var/www/html/theme/edumy
-
-# RUN unzip -o edumy.zip && \
-#   cp -Rn theme/* /var/www/html/theme/ && \
-#   cp -Rn blocks/* /var/www/html/blocks/ && \
-#   cp -Rn local/* /var/www/html/local/
-
 # Eliminar el archivo edumy.zip después de extraer el contenido
 RUN rm edumy.zip
 
