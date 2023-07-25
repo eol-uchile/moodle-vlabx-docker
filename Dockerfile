@@ -39,11 +39,7 @@ WORKDIR /var/www/html
 COPY edumy.zip .
 
 
-RUN unzip edumy.zip -d edumy \
-  && cp -Rn edumy/theme/* /var/www/html/theme/ \
-  && cp -Rn edumy/blocks/* /var/www/html/blocks/ \
-  && cp -Rn edumy/local/* /var/www/html/local/ \
-  && cp -Rn edumy/report/* /var/www/html/report/ \
+RUN unzip edumy.zip \
   && chown -R www-data:www-data /var/www/html/theme \
   && chown -R www-data:www-data /var/www/html/blocks \
   && chown -R www-data:www-data /var/www/html/local \
