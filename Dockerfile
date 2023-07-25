@@ -19,13 +19,13 @@ ADD /es_39.tar.gz /var/www/html/lang
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY php.ini /usr/local/etc/php/php.ini
 
-RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/22788/gradeexport_checklist_moodle310_2020101700.zip /var/www/html/grade/export/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/22787/mod_checklist_moodle310_2020110700.zip /var/www/html/mod/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/21827/filter_poodll_moodle310_2020062400.zip /var/www/html/filter/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/22837/assignfeedback_poodll_moodle310_2020111200.zip /var/www/html/mod/assign/feedback/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/22807/local_feedbackviewer_moodle310_2020100701.zip /var/www/html/local/ \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/22766/theme_moove_moodle39_2020071900.zip /var/www/html/theme \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/26640/report_coursesize_moodle40_2021030808.zip /var/www/html/report/ \
+RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/28966/gradeexport_checklist_moodle42_2023041400.zip /var/www/html/grade/export/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28962/mod_checklist_moodle42_2023041400.zip /var/www/html/mod/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/29534/filter_poodll_moodle42_2023062800.zip /var/www/html/filter/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/25445/assignfeedback_poodll_moodle41_2021111100.zip /var/www/html/mod/assign/feedback/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/24233/local_feedbackviewer_moodle42_2022051900.zip /var/www/html/local/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/24598/theme_moove_moodle311_2021052100.zip /var/www/html/theme \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28315/report_coursesize_moodle41_2023010900.zip /var/www/html/report/
 #   && /root/moodle-extension.php https://moodle.org/plugins/download.php/28708/mod_customcert_moodle311_2021051704.zip /var/www/html/mod/
 
 # RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
