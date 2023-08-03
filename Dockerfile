@@ -46,18 +46,6 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/28966/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/32228/mod_customcert_moodle44_2024042201.zip /var/www/html/mod/
 # RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
 
-# Install Edumy theme
-COPY edumy.zip .
-RUN unzip edumy.zip \
-  && chown -R www-data:www-data theme \
-  && chmod -R 755 theme \
-  && chown -R www-data:www-data blocks \
-  && chmod -R 755 blocks \
-  && chown -R www-data:www-data local \
-  && chmod -R 755 local
-# delete distribution archive
-RUN rm edumy.zip
-
 # PHP configuration
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY php.ini /usr/local/etc/php/php.ini
@@ -67,4 +55,23 @@ VOLUME /var/www/moodledata
 FROM nginx:1.25.1 as nginx
 
 COPY --from=base /var/www/html /var/www/html
+COPY static.conf /etc/nginx/conf.d/default.conf
+
+FROM base as edumy
+
+# Install Edumy theme
+COPY edumy.zip .
+RUN unzip -u edumy.zip -x local/contact/ report/coursestats/ report/overviewstats/ \
+  && chown -R www-data:www-data theme \
+  && chmod -R 755 theme \
+  && chown -R www-data:www-data blocks \
+  && chmod -R 755 blocks \
+  && chown -R www-data:www-data local \
+  && chmod -R 755 local
+# delete distribution archive
+RUN rm edumy.zip
+
+FROM nginx:1.25.1 as nginx-vlabx
+
+COPY --from=edumy /var/www/html /var/www/html
 COPY static.conf /etc/nginx/conf.d/default.conf
