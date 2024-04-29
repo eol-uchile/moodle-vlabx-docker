@@ -25,8 +25,9 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/28966/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/25445/assignfeedback_poodll_moodle41_2021111100.zip /var/www/html/mod/assign/feedback/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/24233/local_feedbackviewer_moodle42_2022051900.zip /var/www/html/local/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/24598/theme_moove_moodle311_2021052100.zip /var/www/html/theme \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28315/report_coursesize_moodle41_2023010900.zip /var/www/html/report/
-#   && /root/moodle-extension.php https://moodle.org/plugins/download.php/28708/mod_customcert_moodle311_2021051704.zip /var/www/html/mod/
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28315/report_coursesize_moodle41_2023010900.zip /var/www/html/report/ \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28629/format_tiles_moodle311_2020080631.zip /var/www/html/course/format \
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/28708/mod_customcert_moodle311_2021051704.zip /var/www/html/mod/
 
 # RUN mv /var/www/html/mod/mdjnelson-moodle-mod_customcert-341be84 /var/www/html/mod/customcert
 
