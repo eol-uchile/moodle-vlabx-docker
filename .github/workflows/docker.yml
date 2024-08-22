@@ -2,31 +2,42 @@ name: Docker Image CI
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
     - name: Pull submodules
       run: git submodule update --init --recursive
 
     - name: Build the Docker image
-      run: docker build . --target base --tag ghcr.io/eol-virtuallabx/moodle-docker:${GITHUB_SHA}
+      run: docker build . --target edumy --tag ghcr.io/eol-virtuallabx/moodle-docker:${GITHUB_SHA}
 
     - name: Build static image
-      run: docker build . --target nginx --tag ghcr.io/eol-virtuallabx/moodle-docker:nginx-${GITHUB_SHA}
+      run: docker build . --target nginx-vlabx --tag ghcr.io/eol-virtuallabx/moodle-docker:nginx-${GITHUB_SHA}
 
     - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
+      if: ${{ github.ref == 'refs/heads/master' }}
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
-        username: eol-vl
-        password: ${{ secrets.CR_PAT }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push to Github Container Registry
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
           docker push ghcr.io/eol-virtuallabx/moodle-docker:${GITHUB_SHA}
           docker push ghcr.io/eol-virtuallabx/moodle-docker:nginx-${GITHUB_SHA}
