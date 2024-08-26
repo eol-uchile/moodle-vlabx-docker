@@ -46,7 +46,8 @@ docker-php-ext-install -j$(nproc) \
     pgsql \
     soap \
     xsl \
-    sodium
+    sodium \
+    zip
 
 # GD.
 docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
@@ -55,10 +56,6 @@ docker-php-ext-install -j$(nproc) gd
 # Memcached, Redis, APCu, igbinary, solr, uuid
 pecl install memcached redis apcu igbinary uuid
 docker-php-ext-enable memcached redis apcu igbinary uuid
-
-# ZIP
-docker-php-ext-configure zip --with-zip
-docker-php-ext-install zip
 
 echo 'apc.enable_cli = On' >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 

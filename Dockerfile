@@ -1,6 +1,6 @@
-FROM php:8.3-fpm-bookworm AS base
+FROM php:8.2-fpm-bookworm AS base
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Install-Recommends \"0\";" > /etc/apt/apt.conf.d/01norecommend
 RUN echo "APT::Install-Suggests \"0\";" >> /etc/apt/apt.conf.d/01norecommend
 RUN apt-get update && apt-get -y dist-upgrade
