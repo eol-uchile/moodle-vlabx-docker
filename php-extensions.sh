@@ -7,14 +7,14 @@ echo "Installing apt dependencies"
 # Build packages will be added during the build, but will be removed at the end.
 BUILD_PACKAGES="gettext gnupg libcurl4-openssl-dev libfreetype6-dev libicu-dev libjpeg62-turbo-dev \
   libldap2-dev libmemcached-dev libpng-dev libpq-dev libxml2-dev libxslt-dev \
-  unixodbc-dev uuid-dev libmcrypt-dev libzip-dev libsodium-dev"
+  unixodbc-dev uuid-dev libmcrypt-dev libzip-dev libsodium-dev libzip-dev"
 
 # Packages for Postgres.
 PACKAGES_POSTGRES="libpq5"
 
 # Packages for other Moodle runtime dependenices.
 PACKAGES_RUNTIME="ghostscript libaio1 libcurl4 libgss3 libicu72 libxml2 libxslt1.1 \
-  sassc unixodbc unzip zip"
+  sassc unixodbc unzip zip libzip4"
 
 # Packages for Memcached.
 PACKAGES_MEMCACHED="libmemcached11 libmemcachedutil2"

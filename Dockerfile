@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-bookworm AS base
+FROM php:8.1-fpm-bookworm AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Install-Recommends \"0\";" > /etc/apt/apt.conf.d/01norecommend
