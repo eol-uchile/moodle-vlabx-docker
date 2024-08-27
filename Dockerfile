@@ -43,7 +43,9 @@ RUN /root/moodle-extension.php https://moodle.org/plugins/download.php/31738/gra
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/21951/report_coursestats_moodle41_2020070900.zip /var/www/html/report/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/32046/report_overviewstats_moodle44_2024051000.zip /var/www/html/report/ \
   && /root/moodle-extension.php https://moodle.org/plugins/download.php/32822/format_tiles_moodle41_2024080914.zip /var/www/html/course/format \
-  && /root/moodle-extension.php https://moodle.org/plugins/download.php/32228/mod_customcert_moodle44_2024042201.zip /var/www/html/mod/
+  && /root/moodle-extension.php https://moodle.org/plugins/download.php/32231/mod_customcert_moodle41_2022112808.zip /var/www/html/mod/
+
+RUN for dir in grade mod filter local theme report course; do chown -R www-data:www-data ${dir}; chmod -R 755 ${dir}; done
 
 # PHP configuration
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -51,25 +53,23 @@ COPY php.ini /usr/local/etc/php/php.ini
 
 VOLUME /var/www/moodledata
 
+# Static server image
 FROM nginx:stable-alpine AS nginx
 
 COPY --from=base /var/www/html /var/www/html
 COPY static.conf /etc/nginx/conf.d/default.conf
 
+# Moodle with Edumy theme
 FROM base AS edumy
 
 # Install Edumy theme
 COPY edumy.zip .
-RUN unzip -u edumy.zip -x local/contact/ report/coursestats/ report/overviewstats/ \
-  && chown -R www-data:www-data theme \
-  && chmod -R 755 theme \
-  && chown -R www-data:www-data blocks \
-  && chmod -R 755 blocks \
-  && chown -R www-data:www-data local \
-  && chmod -R 755 local
+RUN unzip -u edumy.zip -x local/contact/ report/coursestats/ report/overviewstats/
+RUN for dir in blocks local report theme; do chown -R www-data:www-data ${dir}; chmod -R 755 ${dir}; done
 # delete distribution archive
 RUN rm edumy.zip
 
+# Static server image for edumy version
 FROM nginx:stable-alpine AS nginx-vlabx
 
 COPY --from=edumy /var/www/html /var/www/html
