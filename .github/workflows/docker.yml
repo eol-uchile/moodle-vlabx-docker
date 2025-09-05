@@ -23,10 +23,10 @@ jobs:
       run: git submodule update --init --recursive
 
     - name: Build the Docker image
-      run: docker build . --target edumy --tag ghcr.io/eol-virtuallabx/moodle-docker:${GITHUB_SHA}
+      run: docker build . --target edumy --tag ghcr.io/eol-uchile/moodle-vlabx-docker:${GITHUB_SHA}
 
     - name: Build static image
-      run: docker build . --target nginx-vlabx --tag ghcr.io/eol-virtuallabx/moodle-docker:nginx-${GITHUB_SHA}
+      run: docker build . --target nginx-vlabx --tag ghcr.io/eol-uchile/moodle-vlabx-docker:nginx-${GITHUB_SHA}
 
     - name: Login to GitHub Container Registry
       if: ${{ github.ref == 'refs/heads/master' }}
@@ -39,5 +39,5 @@ jobs:
     - name: Push to Github Container Registry
       if: ${{ github.ref == 'refs/heads/master' }}
       run: |
-          docker push ghcr.io/eol-virtuallabx/moodle-docker:${GITHUB_SHA}
-          docker push ghcr.io/eol-virtuallabx/moodle-docker:nginx-${GITHUB_SHA}
+          docker push ghcr.io/eol-uchile/moodle-vlabx-docker:${GITHUB_SHA}
+          docker push ghcr.io/eol-uchile/moodle-vlabx-docker:nginx-${GITHUB_SHA}
