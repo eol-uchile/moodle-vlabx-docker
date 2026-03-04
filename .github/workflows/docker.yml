@@ -23,7 +23,7 @@ jobs:
       run: git submodule update --init --recursive
 
     - name: Build the Docker image
-      run: docker build . --target edumy --tag ghcr.io/eol-uchile/moodle-vlabx-docker:${GITHUB_SHA}
+      run: docker build . --target base --tag ghcr.io/eol-uchile/moodle-vlabx-docker:${GITHUB_SHA}
 
     - name: Build static image
       run: docker build . --target nginx-vlabx --tag ghcr.io/eol-uchile/moodle-vlabx-docker:nginx-${GITHUB_SHA}
